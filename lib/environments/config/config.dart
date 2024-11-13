@@ -12,6 +12,8 @@ class Config {
 
   String? weatherToken;
 
+  String? openweathermapImageUrl;
+
   static Config _instance = Config._internal();
 
   factory Config() => _instance;
