@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../features/main_app/splash_screen.dart';
-import '../../features/weather/home_screen.dart';
+import '../../features/weather/presentation/home_screen.dart';
 
 class RouteList {
   static const String splash = '/splash';
