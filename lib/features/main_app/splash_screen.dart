@@ -8,12 +8,16 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: Text('Weather App'),
+            child: Image(
+              image: NetworkImage('https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2020/05/logo.png'),
+              width: width * 0.7,
+            ),
           ),
           TextButton(
             onPressed: () {

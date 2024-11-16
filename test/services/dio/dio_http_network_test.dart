@@ -16,6 +16,7 @@ void main() {
   AbstractHttpNetwork dioHttpNetwork = MockDioHttpNetwork();
 
   testGetRequestWithMockServerResponse(dioHttpNetwork);
+  testGetRequestWithServerResponseAndStatusCode(dioHttpNetwork);
 }
 
 void testGetRequestWithMockServerResponse(AbstractHttpNetwork dioHttpNetwork) {
@@ -123,15 +124,6 @@ void testGetRequestWithServerResponseAndStatusCode(AbstractHttpNetwork dioHttpNe
     },
   ];
 
-// ###Information responses
-
-// 100 Continue
-
-// 101 Switching Protocols
-
-// 102 Processing (WebDAV)
-
-// 103 Early Hints
   group('Get Request With Mock Server Response Test', () {
     for (var testCase in getRequestwithServerResponseTestCases) {
       final description = testCase['description'];
