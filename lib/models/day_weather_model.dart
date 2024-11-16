@@ -1,12 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '../core/utils/date_time_util.dart';
-import 'weather_item_model.dart';
+import 'weather_data_model.dart';
 
 part 'day_weather_model.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class DayWeatherModel {
+class DayWeatherModel extends DayWeatherItem {
   @JsonKey(name: 'dt')
   final DateTime? dateTime;
   @JsonKey(name: 'temp', readValue: readTemperatureValue)
