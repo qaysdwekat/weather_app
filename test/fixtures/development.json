@@ -3,5 +3,5 @@
     "production": false,
     "base_url": "https://api.openweathermap.org/",
     "weather_token": "weather_token_will_be_here",
-    "openweathermap_image_url": "https://rodrigokamada.github.io/openweathermap/images/{name}_t@{size}.png"
+    "openweathermap_image_url": "https://openweathermap.org/img/wn/{icon}@4x.png"
 }

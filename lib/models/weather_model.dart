@@ -7,14 +7,18 @@ part 'weather_model.g.dart';
 
 @JsonSerializable()
 class WeatherModel extends WeatherItem {
+  @override
   final DayWeatherModel? current;
+  @override
   final List<DayWeatherModel>? daily;
 
-  WeatherModel({
+  const WeatherModel({
     required this.current,
     required this.daily,
-  });
-
+  }) : super(
+          current: current,
+          daily: daily,
+        );
 
   factory WeatherModel.fromJson(
     Map<String, dynamic> json,
@@ -22,5 +26,4 @@ class WeatherModel extends WeatherItem {
       _$WeatherModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$WeatherModelToJson(this);
-
 }
