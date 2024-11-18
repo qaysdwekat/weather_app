@@ -9,6 +9,8 @@ class DayWeatherItem extends Equatable {
   final double? humidity;
   final double? windSpeed;
   final List<WeatherData>? weather;
+  final double? minTemperature;
+  final double? maxTemperature;
 
   final bool isEmpty;
 
@@ -19,6 +21,8 @@ class DayWeatherItem extends Equatable {
     required this.humidity,
     required this.windSpeed,
     required this.weather,
+    this.maxTemperature,
+    this.minTemperature,
     this.isEmpty = false,
   });
 
@@ -41,4 +45,10 @@ class DayWeatherItem extends Equatable {
         windSpeed,
         weather,
       ];
+
+  String get iconUrl => weather?.firstOrNull?.iconUrl ?? '';
+
+  String get title => weather?.firstOrNull?.title ?? '';
+
+  String get description => weather?.firstOrNull?.description ?? '';
 }

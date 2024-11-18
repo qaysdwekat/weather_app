@@ -9,11 +9,19 @@ part 'day_weather_model.g.dart';
 @JsonSerializable(fieldRename: FieldRename.snake)
 class DayWeatherModel extends DayWeatherItem {
   @override
-  @JsonKey(name: 'dt', readValue: readDateTimeValue)
+  @JsonKey(name: 'dt', readValue: DateTimeUtil.readDateTimeValue)
   final DateTime? dateTime;
   @override
   @JsonKey(name: 'temp', readValue: readTemperatureValue)
   final double? temperature;
+
+  @override
+  @JsonKey(name: 'min', readValue: readMinMaxTemperatureValue)
+  final double? minTemperature;
+
+  @override
+  @JsonKey(name: 'max', readValue: readMinMaxTemperatureValue)
+  final double? maxTemperature;
 
   @override
   final List<WeatherDataModel>? weather;
@@ -24,11 +32,15 @@ class DayWeatherModel extends DayWeatherItem {
     required super.pressure,
     required super.humidity,
     required super.windSpeed,
+    required this.maxTemperature,
+    required this.minTemperature,
     required this.weather,
   }) : super(
           weather: weather,
           dateTime: dateTime,
           temperature: temperature,
+          minTemperature: minTemperature,
+          maxTemperature: maxTemperature,
         );
 
   static Object? readTemperatureValue(Map<dynamic, dynamic> json, String key) {
@@ -46,10 +58,11 @@ class DayWeatherModel extends DayWeatherItem {
     return json[key];
   }
 
-  static Object? readDateTimeValue(Map<dynamic, dynamic> json, String key) {
-    final timestamp = json[key];
-    var date = DateTime.fromMicrosecondsSinceEpoch(timestamp);
-    return date;
+  static Object? readMinMaxTemperatureValue(Map<dynamic, dynamic> json, String key) {
+    if (json['temp'] is Map<dynamic, dynamic>) {
+      return json['temp'][key];
+    }
+    return json[key];
   }
 
   factory DayWeatherModel.fromJson(

@@ -1,1 +1,9 @@
-{}
+{
+    "pressure": "{pressure} hPa",
+    "humidity": "{humidity} %",
+    "metric_temperature": "°C",
+    "standard_temperature": "°F",
+    "metric_wind_speed": "{speed} km/h",
+    "standard_wind_speed": "{speed} mph",
+    "refresh": "Refresh"
+}

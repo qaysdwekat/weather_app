@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/utils/date_time_util.dart';
+import '../../../../../widgets/app_image.dart';
 import '../../../../../widgets/base_loading_card.dart';
+import '../../../domain/entities/day_weather_item.dart';
 
 part 'day_forecast_loading.dart';
 
 class DayForecastCard extends StatelessWidget {
-  final String title;
-  final Widget icon;
-  final bool isEmpty;
-  final String description;
-
+  final DayWeatherItem? day;
+  final EdgeInsetsGeometry? margin;
   const DayForecastCard({
     super.key,
-    required this.title,
-    required this.icon,
-    required this.description,
-    this.isEmpty = false,
+    required this.day,
+    this.margin,
   });
 
   @override
   Widget build(BuildContext context) {
-    return isEmpty
+    final width = MediaQuery.sizeOf(context).width;
+    return day?.isEmpty == true
         ? DayForecastLoading()
         : Container(
-            margin: EdgeInsets.only(right: 12),
+            margin: margin,
             padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
               border: Border.all(
@@ -46,16 +45,29 @@ class DayForecastCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  title,
+                  day?.dateTime != null
+                      ? DateTimeUtil.getStringFromDate(
+                          day!.dateTime!,
+                          DateTimeFormatConstants.day,
+                        )
+                      : '',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: Colors.white,
                         fontSize: 14,
                         fontWeight: FontWeight.w800,
                       ),
                 ),
-                icon,
+                AppImage(
+                  imageUrl: day?.weather?.firstOrNull?.iconUrl ?? '',
+                  placeholderWidget: Icon(
+                    Icons.wb_sunny_rounded,
+                    color: Colors.white,
+                    size: width * 0.14,
+                  ),
+                  width: width * 0.14,
+                ),
                 Text(
-                  description,
+                  '${day?.minTemperature} - ${day?.maxTemperature} \u2103',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Colors.white,
                         fontSize: 12,

@@ -1,20 +1,30 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:weather_app/features/weather/presentation/home/events/get_weather_info_event.dart';
-import 'package:weather_app/features/weather/presentation/home/home_bloc.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../../../../environments/config/config.dart';
-import '../../../../widgets/app_image.dart';
+import '../../../../core/utils/date_time_util.dart';
+import '../../domain/entities/day_weather_item.dart';
 import '../../domain/entities/weather_info_request.dart';
+import 'events/get_weather_info_event.dart';
+import 'events/refresh_weather_info_event.dart';
+import 'home_bloc.dart';
 import 'home_state.dart';
 import 'widgets/day_forecast_card.dart';
+import 'widgets/error_card.dart';
 import 'widgets/main_weather_card.dart';
+
+part 'widgets/landscape_home_screen.dart';
+part 'widgets/portrait_home_screen.dart';
 
 final GetIt sl = GetIt.instance;
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
+
+  final RefreshController refreshController = RefreshController();
 
   final bloc = sl<HomeBloc>();
 
@@ -31,23 +41,25 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: onCreate(context),
-      child: BlocConsumer<HomeBloc, HomeState>(
-          listener: (c, s) {},
-          builder: (c, s) {
-            return buildScreen(c, s);
-          }),
+      child: BlocConsumer<HomeBloc, HomeState>(listener: (c, s) {
+        if (s is LoadedState || s is ErrorState) {
+          refreshController.refreshCompleted();
+        }
+      }, builder: (c, s) {
+        return buildScreen(c, s);
+      }),
     );
   }
 
   Widget buildScreen(BuildContext context, HomeState state) {
-    final width = MediaQuery.sizeOf(context).width;
-
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(
-          'Friday',
+          state.weatherInfo?.current?.dateTime != null
+              ? DateTimeUtil.getStringFromDate(state.weatherInfo!.current!.dateTime!, DateTimeFormatConstants.day)
+              : '',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontSize: 24,
                 color: const Color(0xFFFFFFFF),
@@ -69,52 +81,56 @@ class HomeScreen extends StatelessWidget {
             stops: [0.0, 0.5, 1.0],
           ),
         ),
-        padding: const EdgeInsets.only(
-          top: 128.0,
-          right: 12,
-          left: 12,
-          bottom: 12,
-        ),
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: MainWeatherCard(
-                weather: state.weatherInfo?.current,
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 72,
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 120,
-                child: ListView.builder(
-                    itemCount: state.weatherInfo?.daily?.length ?? 0,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      final day = state.weatherInfo?.daily?[index];
-                      return DayForecastCard(
-                        title: 'Fri',
-                        description: '20 - 25 \u2103',
-                        // '20 \u2109',
-                        // '20 / 25 \u2103',
-                        icon: AppImage(
-                          imageUrl: Config().openweathermapImageUrl?.replaceAll('{icon}', '01d') ?? '',
-                          placeholderWidget: Icon(
-                            Icons.wb_sunny_rounded,
-                            color: Colors.white,
-                            size: width * 0.14,
-                          ),
-                          width: width * 0.14,
-                        ),
-                        isEmpty: day?.isEmpty == true,
-                      );
-                    }),
-              ),
-            ),
-          ],
+        child: SmartRefresher(
+          primary: false,
+          enablePullDown: true,
+          enablePullUp: false,
+          header: CustomHeader(
+            refreshStyle: RefreshStyle.UnFollow,
+            builder: (BuildContext context, RefreshStatus? mode) {
+              return Column(
+                children: [
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  CircularProgressIndicator(),
+                ],
+              );
+            },
+          ),
+          controller: refreshController,
+          onRefresh: () {
+            bloc.add(RefreshWeatherInfoEvent(WeatherInfoRequest(
+              latitude: '49.0131',
+              longitude: '8.4043',
+            )));
+          },
+          child: OrientationBuilder(
+            builder: (BuildContext context, Orientation orientation) {
+              if (state is ErrorState) {
+                return ErrorCard(
+                    message: state.error,
+                    onPressed: () {
+                      bloc.add(RefreshWeatherInfoEvent(WeatherInfoRequest(
+                        latitude: '49.0131',
+                        longitude: '8.4043',
+                      )));
+                    });
+              }
+              switch (orientation) {
+                case Orientation.portrait:
+                  return PortraitHomeScreen(
+                    currentWeather: state.weatherInfo?.current,
+                    daily: state.weatherInfo?.daily,
+                  );
+                case Orientation.landscape:
+                  return LandscapeHomeScreen(
+                    currentWeather: state.weatherInfo?.current,
+                    daily: state.weatherInfo?.daily,
+                  );
+              }
+            },
+          ),
         ),
       ),
     );
