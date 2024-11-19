@@ -17,13 +17,13 @@ class SplashScreen extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF29B2D0), // Top-left color
-              Color(0xFF33AADD), // Center color
-              Color(0xFF2DC8EA), // Bottom-right color
+              Color(0xFF29B2D0),
+              Color(0xFF33AADD),
+              Color(0xFF2DC8EA),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            stops: [0.0, 0.5, 1.0], // Gradient stops
+            stops: [0.0, 0.5, 1.0],
           ),
         ),
         child: AnimatedSplashChild(

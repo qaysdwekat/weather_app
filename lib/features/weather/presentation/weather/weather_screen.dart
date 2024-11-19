@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:weather_app/features/weather/presentation/weather/events/update_current_weather_info_event.dart';
 
 import '../../../../core/utils/date_time_util.dart';
 import '../../../../generated/l10n.dart';
@@ -191,15 +192,21 @@ class WeatherScreen extends StatelessWidget {
               switch (orientation) {
                 case Orientation.portrait:
                   return PortraitWeatherScreen(
-                    currentWeather: state.weatherInfo?.current,
+                    currentWeather: state.current,
                     daily: state.weatherInfo?.daily,
                     unitSymbol: state.unitSymbol,
+                    onTap: (day) {
+                      bloc.add(UpdateCurrentWeatherInfoEvent(day));
+                    },
                   );
                 case Orientation.landscape:
                   return LandscapeWeatherScreen(
-                    currentWeather: state.weatherInfo?.current,
+                    currentWeather: state.current,
                     daily: state.weatherInfo?.daily,
                     unitSymbol: state.unitSymbol,
+                    onTap: (day) {
+                      bloc.add(UpdateCurrentWeatherInfoEvent(day));
+                    },
                   );
               }
             },

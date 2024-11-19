@@ -45,7 +45,7 @@ class MainWeatherLoading extends StatelessWidget with BaseLoadingCard {
             padding: EdgeInsets.all(12),
             width: double.infinity,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.0), // Rounded corners
+              borderRadius: BorderRadius.circular(8.0),
               color: Color(0xFF104084).withOpacity(0.4),
             ),
             child: Column(
@@ -58,7 +58,7 @@ class MainWeatherLoading extends StatelessWidget with BaseLoadingCard {
                   context,
                   height: height * 0.2,
                   width: width * 0.5,
-                  borderRadius: BorderRadius.circular(12.0), // Rounded corners
+                  borderRadius: BorderRadius.circular(12.0),
                 ),
                 SizedBox(
                   height: 24,
@@ -83,7 +83,7 @@ class MainWeatherLoading extends StatelessWidget with BaseLoadingCard {
           Container(
             padding: EdgeInsets.all(12),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.0), // Rounded corners
+              borderRadius: BorderRadius.circular(8.0),
               color: Color(0xFF104084).withOpacity(0.4),
             ),
             child: Row(
@@ -152,8 +152,6 @@ class MainWeatherLoading extends StatelessWidget with BaseLoadingCard {
                     ],
                   ),
                 ),
-                // Text('Humidity: '),
-                // Text('Wind: '),
               ],
             ),
           ),

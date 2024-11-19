@@ -4,11 +4,14 @@ class PortraitWeatherScreen extends StatelessWidget {
   final DayWeatherItem? currentWeather;
   final List<DayWeatherItem>? daily;
   final String unitSymbol;
+  final Function(DayWeatherItem) onTap;
+
   const PortraitWeatherScreen({
     super.key,
     this.currentWeather,
     this.daily,
     required this.unitSymbol,
+    required this.onTap,
   });
 
   @override
@@ -60,11 +63,16 @@ class PortraitWeatherScreen extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     final day = daily?[index];
-                    return DayForecastCard(
-                      day: day,
-                      margin: EdgeInsets.only(right: 12),
-                      width: size.width * 0.14,
-                      unitSymbol: unitSymbol,
+                    return InkWell(
+                      onTap: () {
+                        if (day != null) onTap.call(day);
+                      },
+                      child: DayForecastCard(
+                        day: day,
+                        margin: EdgeInsets.only(right: 12),
+                        width: size.width * 0.14,
+                        unitSymbol: unitSymbol,
+                      ),
                     );
                   }),
             ),

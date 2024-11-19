@@ -32,9 +32,9 @@ class DayForecastCard extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border.all(
                 color: Color(0xFFE2E2E2),
-                width: 1.5, // Border width
+                width: 1.5,
               ),
-              borderRadius: BorderRadius.circular(8.0), // Rounded corners
+              borderRadius: BorderRadius.circular(8.0),
               color: Color(0xFFFFFFFF).withOpacity(0.4),
               gradient: LinearGradient(
                 colors: [
@@ -43,7 +43,7 @@ class DayForecastCard extends StatelessWidget {
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                stops: [0.0, 1.0], // Gradient stops
+                stops: [0.0, 1.0],
               ),
             ),
             child: Column(

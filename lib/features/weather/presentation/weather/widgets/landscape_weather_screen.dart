@@ -4,12 +4,14 @@ class LandscapeWeatherScreen extends StatelessWidget {
   final DayWeatherItem? currentWeather;
   final List<DayWeatherItem>? daily;
   final String unitSymbol;
+  final Function(DayWeatherItem) onTap;
 
   const LandscapeWeatherScreen({
     super.key,
     this.currentWeather,
     this.daily,
     required this.unitSymbol,
+    required this.onTap,
   });
 
   @override
@@ -57,27 +59,20 @@ class LandscapeWeatherScreen extends StatelessWidget {
                           itemCount: daily?.length ?? 0,
                           itemBuilder: (_, index) {
                             final day = daily?[index];
-                            return DayForecastCard(
-                              day: day,
-                              margin: EdgeInsets.only(right: 12, left: 12, bottom: 12),
-                              width: size.width * 0.1,
-                              unitSymbol: unitSymbol,
+                            return InkWell(
+                              onTap: () {
+                                if (day != null) onTap.call(day);
+                              },
+                              child: DayForecastCard(
+                                day: day,
+                                margin: EdgeInsets.only(right: 12, left: 12, bottom: 12),
+                                width: size.width * 0.1,
+                                unitSymbol: unitSymbol,
+                              ),
                             );
                           }),
                     ],
                   ),
-                  // Container(
-                  //   color: Colors.red,
-                  //   child: ListView.builder(
-                  //       itemCount: daily?.length ?? 0,
-                  //       itemBuilder: (context, index) {
-                  //         final day = daily?[index];
-                  //         return DayForecastCard(
-                  //           day: day,
-                  //           margin: EdgeInsets.only(right: 12, left: 12, bottom: 12),
-                  //         );
-                  //       }),
-                  // ),
                 ),
               ],
             ),

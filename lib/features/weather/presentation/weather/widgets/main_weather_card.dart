@@ -40,7 +40,7 @@ class MainWeatherCard extends StatelessWidget {
                 padding: EdgeInsets.all(8),
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0), // Rounded corners
+                  borderRadius: BorderRadius.circular(8.0),
                   color: Color(0xFF104084).withOpacity(0.4),
                 ),
                 child: Column(
@@ -83,7 +83,7 @@ class MainWeatherCard extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0), // Rounded corners
+                  borderRadius: BorderRadius.circular(8.0),
                   color: Color(0xFF104084).withOpacity(0.4),
                 ),
                 child: Row(

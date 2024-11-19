@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Push screen on TabBar
 class AppNavigate {
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 

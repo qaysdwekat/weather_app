@@ -1,12 +1,14 @@
 import 'package:equatable/equatable.dart';
-import 'package:weather_app/features/weather/domain/entities/weather/weather_item.dart';
-import 'package:weather_app/models/weather/temperature_unit.dart';
 
 import '../../../../generated/l10n.dart';
+import '../../../../models/weather/temperature_unit.dart';
 import '../../domain/entities/weather/day_weather_item.dart';
+import '../../domain/entities/weather/weather_item.dart';
 
 sealed class WeatherState extends Equatable {
   final WeatherItem? weatherInfo;
+
+  final DayWeatherItem? current;
 
   final TemperatureUnit unit;
 
@@ -15,6 +17,7 @@ sealed class WeatherState extends Equatable {
 
   const WeatherState(
     this.weatherInfo, {
+    this.current,
     this.unit = TemperatureUnit.metric,
   });
 
@@ -22,21 +25,25 @@ sealed class WeatherState extends Equatable {
   List<Object?> get props => [
         weatherInfo,
         unit,
+        current,
       ];
 }
 
 class InitialState extends WeatherState {
   InitialState()
-      : super(WeatherItem(
+      : super(
+          WeatherItem(
+            current: DayWeatherItem.empty(),
+            daily: [
+              DayWeatherItem.empty(),
+              DayWeatherItem.empty(),
+              DayWeatherItem.empty(),
+              DayWeatherItem.empty(),
+              DayWeatherItem.empty(),
+            ],
+          ),
           current: DayWeatherItem.empty(),
-          daily: [
-            DayWeatherItem.empty(),
-            DayWeatherItem.empty(),
-            DayWeatherItem.empty(),
-            DayWeatherItem.empty(),
-            DayWeatherItem.empty(),
-          ],
-        ));
+        );
 }
 
 class LoadingState extends WeatherState {
@@ -52,6 +59,7 @@ class LoadingState extends WeatherState {
               DayWeatherItem.empty(),
             ],
           ),
+          current: DayWeatherItem.empty(),
         );
 }
 
@@ -61,7 +69,18 @@ class LoadedState extends WeatherState {
   const LoadedState(
     this.data, {
     required super.unit,
-  }) : super(data);
+    super.current,
+  }) : super(
+          data,
+        );
+}
+
+class LoadedCurrentWeatherState extends WeatherState {
+  const LoadedCurrentWeatherState(
+    super.weatherInfo, {
+    super.unit,
+    super.current,
+  });
 }
 
 class ErrorState extends WeatherState {

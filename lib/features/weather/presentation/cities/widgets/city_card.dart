@@ -28,7 +28,7 @@ class CityCard extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.all(24),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0), // Rounded corners
+                borderRadius: BorderRadius.circular(8.0),
                 color: Color(0xFF104084).withOpacity(0.4),
               ),
               margin: EdgeInsets.only(right: 12, left: 12, bottom: 12),
