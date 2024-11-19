@@ -30,12 +30,12 @@ Before you begin, make sure you have the following installed:
             "base_url": "base_url",
             "weather_token": "your_dev_weather_token",
             "openweathermap_image_url": "openweathermap_image_url"
-            }```
+            }
+         ```
     - Save this file at: 
         ```bash
         lib/environments/weather_app/development/development.json
         ```
-
 
 - Production Configration: 
     -  Create a file `production.json` with the following content:
@@ -62,24 +62,24 @@ Before you begin, make sure you have the following installed:
     ```
 
 4. **Run the Application**
-
-- Run the Application Start the app using the desired environment flavor.
-
-* For Development:
-
-    ```bash
-    flutter run -t lib/environments/weather_app/development/main_development.dart
-    ```
-* For Production:
-
-    ```bash
-    flutter run -t lib/environments/weather_app/production/main_production.dart
-    ```
+   
+   - Run the Application Start the app using the desired environment flavor.
+   
+      * For Development:
+      
+          ```bash
+          flutter run -t lib/environments/weather_app/development/main_development.dart
+          ```
+      * For Production:
+      
+          ```bash
+          flutter run -t lib/environments/weather_app/production/main_production.dart
+          ```
 
 ### Running Tests
 
-- Unit Tests Run the following command to execute unit tests:
-
-    ```bash
-    flutter test
-    ```
+   - Unit Tests Run the following command to execute unit tests:
+   
+       ```bash
+       flutter test
+       ```
