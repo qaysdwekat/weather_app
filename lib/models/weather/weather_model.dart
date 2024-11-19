@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../features/weather/domain/entities/weather_item.dart';
+import '../../features/weather/domain/entities/weather/weather_item.dart';
 import 'day_weather_model.dart';
 
 part 'weather_model.g.dart';

@@ -2,8 +2,8 @@ import 'dart:async';
 
 import '../../../../core/base/single_usecase_with_parameter.dart';
 import '../../../../core/base/usecase_value.dart';
-import '../entities/weather_info_request.dart';
-import '../entities/weather_item.dart';
+import '../entities/weather/weather_info_request.dart';
+import '../entities/weather/weather_item.dart';
 import '../repositories/abstract_weather_repository.dart';
 
 class GetWeatherInfoUsecase extends SingleUsecaseWithParameter<WeatherItem, WeatherInfoRequest> {

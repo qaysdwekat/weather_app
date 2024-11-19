@@ -3,24 +3,29 @@ import 'package:flutter/material.dart';
 import '../../../../../core/utils/date_time_util.dart';
 import '../../../../../widgets/app_image.dart';
 import '../../../../../widgets/base_loading_card.dart';
-import '../../../domain/entities/day_weather_item.dart';
+import '../../../domain/entities/weather/day_weather_item.dart';
 
 part 'day_forecast_loading.dart';
 
 class DayForecastCard extends StatelessWidget {
   final DayWeatherItem? day;
   final EdgeInsetsGeometry? margin;
+  final double? width;
+  final String unitSymbol;
   const DayForecastCard({
     super.key,
     required this.day,
     this.margin,
+    this.width,
+    required this.unitSymbol,
   });
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width;
     return day?.isEmpty == true
-        ? DayForecastLoading()
+        ? DayForecastLoading(
+            margin: margin,
+          )
         : Container(
             margin: margin,
             padding: EdgeInsets.all(8),
@@ -62,12 +67,12 @@ class DayForecastCard extends StatelessWidget {
                   placeholderWidget: Icon(
                     Icons.wb_sunny_rounded,
                     color: Colors.white,
-                    size: width * 0.14,
+                    size: width,
                   ),
-                  width: width * 0.14,
+                  width: width,
                 ),
                 Text(
-                  '${day?.minTemperature} - ${day?.maxTemperature} \u2103',
+                  '${day?.minTemperature} - ${day?.maxTemperature} $unitSymbol',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Colors.white,
                         fontSize: 12,

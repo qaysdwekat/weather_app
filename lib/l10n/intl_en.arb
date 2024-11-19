@@ -5,5 +5,8 @@
     "standard_temperature": "°F",
     "metric_wind_speed": "{speed} km/h",
     "standard_wind_speed": "{speed} mph",
-    "refresh": "Refresh"
+    "refresh": "Refresh",
+    "select_temperature": "Select Temperature Unit",
+    "celsius": "Celsius (°C)",
+    "fahrenheit": "Fahrenheit (°F)"
 }

@@ -29,7 +29,7 @@ class SplashScreen extends StatelessWidget {
         child: AnimatedSplashChild(
           next: () {
             AppNavigate.pushReplacementNamed(
-              RouteList.home,
+              RouteList.cities,
             );
           },
           imagePath: 'assets/logo/logo_white.png',

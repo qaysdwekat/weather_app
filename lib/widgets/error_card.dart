@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../generated/l10n.dart';
+import '../generated/l10n.dart';
 
 class ErrorCard extends StatelessWidget {
   final String? message;
@@ -14,7 +14,7 @@ class ErrorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(12.0),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -28,6 +28,7 @@ class ErrorCard extends StatelessWidget {
           ),
           Text(
             message ?? '',
+            textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontSize: 16,
                   color: Colors.redAccent,

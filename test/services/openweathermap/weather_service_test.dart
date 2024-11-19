@@ -2,8 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:weather_app/features/weather/data/services/abstract_weather_service.dart';
-import 'package:weather_app/models/weather_info_request_model.dart';
-import 'package:weather_app/models/weather_model.dart';
+import 'package:weather_app/models/weather/weather_info_request_model.dart';
+import 'package:weather_app/models/weather/weather_model.dart';
 
 import 'weather_service_test.mocks.dart';
 

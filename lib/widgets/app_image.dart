@@ -44,7 +44,12 @@ class AppImage extends StatelessWidget {
         width: width,
         height: height,
         fit: fit ?? BoxFit.contain,
-        color: color,
+        colorFilter: color != null
+            ? ColorFilter.mode(
+                color!,
+                BlendMode.src,
+              )
+            : null,
       );
     }
 
@@ -77,7 +82,12 @@ class AppImage extends StatelessWidget {
         width: width,
         height: height,
         fit: fit ?? BoxFit.contain,
-        color: color,
+        colorFilter: color != null
+            ? ColorFilter.mode(
+                color!,
+                BlendMode.src,
+              )
+            : null,
         package: package,
       );
     }

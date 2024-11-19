@@ -1,14 +1,19 @@
 part of 'day_forecast_card.dart';
 
 class DayForecastLoading extends StatelessWidget with BaseLoadingCard {
-  const DayForecastLoading({super.key});
+  final EdgeInsetsGeometry? margin;
+
+  const DayForecastLoading({
+    super.key,
+    this.margin,
+  });
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
 
     return Container(
-      margin: EdgeInsets.only(right: 12),
+      margin: margin,
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
         border: Border.all(
@@ -38,6 +43,9 @@ class DayForecastLoading extends StatelessWidget with BaseLoadingCard {
               width: 40,
             ),
           ),
+          SizedBox(
+            height: 12,
+          ),
           buildShimmer(
             context,
             buildContainer(
@@ -46,9 +54,13 @@ class DayForecastLoading extends StatelessWidget with BaseLoadingCard {
               width: width * 0.12,
             ),
           ),
+          SizedBox(
+            height: 12,
+          ),
           buildShimmer(
               context,
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   buildContainer(
                     context,

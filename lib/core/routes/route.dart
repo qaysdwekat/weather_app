@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
 import '../../features/main_app/splash_screen.dart';
-import '../../features/weather/presentation/home/home_screen.dart';
+import '../../features/weather/domain/entities/geo/city_item.dart';
+import '../../features/weather/presentation/cities/cities_screen.dart';
+import '../../features/weather/presentation/weather/weather_screen.dart';
 
 class RouteList {
   static const String splash = '/splash';
-  static const String home = '/home';
+  static const String weather = '/weather';
+  static const String cities = 'cities';
 }
 
 class Routes {
@@ -20,11 +23,23 @@ class Routes {
           (_) => SplashScreen(),
         );
 
-      case RouteList.home:
+      case RouteList.weather:
+        if (arguments is CityItem) {
+          return _buildRoute(
+            settings,
+            (_) => WeatherScreen(
+              city: arguments,
+            ),
+          );
+        }
+        return _errorRoute();
+
+      case RouteList.cities:
         return _buildRoute(
           settings,
-          (_) => HomeScreen(),
+          (_) => CitiesScreen(),
         );
+
       default:
         return _errorRoute();
     }

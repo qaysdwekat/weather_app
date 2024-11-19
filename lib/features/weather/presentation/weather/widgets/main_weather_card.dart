@@ -3,17 +3,19 @@ import 'package:flutter/material.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../../widgets/app_image.dart';
 import '../../../../../widgets/base_loading_card.dart';
-import '../../../domain/entities/day_weather_item.dart';
+import '../../../domain/entities/weather/day_weather_item.dart';
 
 part 'main_weather__loading.dart';
 
 class MainWeatherCard extends StatelessWidget {
   final DayWeatherItem? weather;
   final double? width;
+  final String unitSymbol;
   const MainWeatherCard({
     super.key,
     required this.weather,
     this.width,
+    required this.unitSymbol,
   });
 
   @override
@@ -28,14 +30,14 @@ class MainWeatherCard extends StatelessWidget {
                 child: Text(
                   weather?.title ?? '',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontSize: 32,
+                        fontSize: 28,
                         color: const Color(0xFFFFFFFF),
                         fontWeight: FontWeight.w800,
                       ),
                 ),
               ),
               Container(
-                padding: EdgeInsets.all(12),
+                padding: EdgeInsets.all(8),
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0), // Rounded corners
@@ -47,6 +49,7 @@ class MainWeatherCard extends StatelessWidget {
                     AppImage(
                       imageUrl: weather?.iconUrl ?? '',
                       width: width,
+                      fit: BoxFit.cover,
                     ),
                     RichText(
                       text: TextSpan(
@@ -54,16 +57,16 @@ class MainWeatherCard extends StatelessWidget {
                           TextSpan(
                             text: weather?.temperature?.toStringAsFixed(2),
                             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                  fontSize: 64,
+                                  fontSize: 28,
                                   color: const Color(0xFFFFFFFF),
                                   fontWeight: FontWeight.w800,
                                 ),
                           ),
                           TextSpan(text: ' '),
                           TextSpan(
-                            text: S.current.standard_temperature,
+                            text: unitSymbol,
                             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                  fontSize: 48,
+                                  fontSize: 20,
                                   color: Colors.white,
                                   fontWeight: FontWeight.w400,
                                 ),
@@ -96,7 +99,7 @@ class MainWeatherCard extends StatelessWidget {
                           Text(
                             S.current.pressure(weather?.pressure ?? -1),
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  fontSize: 16,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
@@ -114,7 +117,7 @@ class MainWeatherCard extends StatelessWidget {
                           Text(
                             S.current.humidity(weather?.humidity ?? -1),
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  fontSize: 16,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
@@ -132,7 +135,7 @@ class MainWeatherCard extends StatelessWidget {
                           Text(
                             S.current.metric_wind_speed(weather?.windSpeed ?? -1),
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  fontSize: 16,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),

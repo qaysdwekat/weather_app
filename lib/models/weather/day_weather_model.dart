@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../core/utils/date_time_util.dart';
-import '../features/weather/domain/entities/day_weather_item.dart';
+import '../../core/utils/date_time_util.dart';
+import '../../features/weather/domain/entities/weather/day_weather_item.dart';
 import 'weather_data_model.dart';
 
 part 'day_weather_model.g.dart';

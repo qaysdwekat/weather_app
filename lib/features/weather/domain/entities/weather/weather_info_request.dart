@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../models/temperature_unit.dart';
+import '../../../../../models/weather/temperature_unit.dart';
 
 class WeatherInfoRequest extends Equatable {
   final String? latitude;
@@ -12,7 +12,7 @@ class WeatherInfoRequest extends Equatable {
     required this.latitude,
     required this.longitude,
     this.exclude = 'minutely,hourly,alerts',
-    this.units = TemperatureUnit.standard,
+    this.units = TemperatureUnit.metric,
   });
 
   @override

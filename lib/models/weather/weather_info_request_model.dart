@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../features/weather/domain/entities/weather_info_request.dart';
+import '../../features/weather/domain/entities/weather/weather_info_request.dart';
 import 'temperature_unit.dart';
 
 part 'weather_info_request_model.g.dart';
