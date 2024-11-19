@@ -21,7 +21,7 @@ void main() {
 }
 
 void testGetWeatherInfoWithMockWeatherModel(AbstractWeatherService dioHttpNetwork) {
-  final List<Map<String, dynamic>> getRequestwithServerResponseTestCases = [
+  final List<Map<String, dynamic>> getWeatherInfoTestCases = [
     {
       'description': 'Successful GET Weather Info',
       'request': TestWeatherInfoRequestModel(),
@@ -42,7 +42,7 @@ void testGetWeatherInfoWithMockWeatherModel(AbstractWeatherService dioHttpNetwor
   ];
 
   group('Get Weather Info With Mock Weather Model', () {
-    for (var testCase in getRequestwithServerResponseTestCases) {
+    for (var testCase in getWeatherInfoTestCases) {
       final description = testCase['description'];
       final request = testCase['request'];
       final expectedResult = testCase['expectedResult'];

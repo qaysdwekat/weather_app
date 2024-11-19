@@ -13,6 +13,7 @@ import 'weather_state.dart';
 class WeatherBloc extends Bloc<AbstractWeatherEvent, WeatherState> {
   WeatherBloc(GetWeatherInfoUsecase weatherInfoUsecase) : super(InitialState()) {
     on<GetWeatherInfoEvent>((event, emit) async {
+      emit(LoadingState());
       final info = await weatherInfoUsecase(event.weatherInfoRequest);
       emit(_eitherSuccessOrErrorState(info, state));
     });
